@@ -188,6 +188,7 @@ namespace KinectV2
         /// <param name="color"></param>
         private void DrawEllipse( Joint joint, Brush color )
         {
+#if true
             // 円の半径
             const int R = 5;
 
@@ -197,6 +198,17 @@ namespace KinectV2
                 Height =  R * 2,
                 Fill = color,
             };
+#else
+            // 円の半径
+            int R = (int)(joint.Position.Z * 10);
+
+            var ellipse = new Ellipse()
+            {
+                Width = R * 2,
+                Height =  R * 2,
+                Fill = color,
+            };
+#endif
 
             // カメラ座標系をカラー座標系に変換する
             var point = kinect.CoordinateMapper.MapCameraPointToColorSpace( joint.Position );
